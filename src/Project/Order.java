@@ -2,33 +2,37 @@ package Project;
 
 import java.util.ArrayList;
 
-public class Order {
+public class Order { // Переименован в Order
 
-    private Customer customer;
-    private ArrayList<Item> items;
-
-    // constructor
-    public Order(Customer customer) {
-        this.customer = customer;
-        this.items = new ArrayList<>();
+    // Конструктор
+    public Order(String orderName) {
+        this.orderName = orderName;
+        this.products = new ArrayList<>(); // Инициализация списка товаров
     }
 
-    // method to adding item for order
-    public void addItem(Item item, int quantity) {
-        if (item.getItemQuantity() >= quantity) {
-            item.setItemQuantity(item.getItemQuantity() - quantity);
-            items.add(new Item(item.getItemName(), item.getItemPrice(), quantity));
-        } else {
-            System.out.println("Not enough stock for item: " + item.getItemName());
+    private final String orderName;
+    private final ArrayList<Product> products;
+
+    // Метод для добавления товара
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    // Поиск товара по названию
+    public Product searchByName(String name) {
+        for (Product product : products) {
+            if (product.getProductName().equalsIgnoreCase(name)) {
+                return product;
+            }
         }
+        return null; // Если товар не найден
     }
 
-    // method for outputing order details
+    // Метод для отображения информации о товарах в заказе
     public void printOrderDetails() {
-        System.out.println("Order Details:");
-        customer.printCustomerDetails();
-        for (Item item : items) {
-            item.printItemDetails();
+        System.out.println("Order: " + orderName);
+        for (Product product : products) {
+            product.printDetails(); // Вывод информации о каждом товаре
         }
     }
 }

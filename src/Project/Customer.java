@@ -1,19 +1,21 @@
 package Project;
 
-public class Customer {
+import java.util.Objects;
 
-    private String customerName;
-    private String customerEmail;
-    private String customerPhone;
+public class Customer { // Переименован в Customer
 
-    // Constructor
-    public Customer(String customerName, String customerEmail, String customerPhone) {
+    // Конструктор
+    public Customer(String customerName, String email, String phone) {
         this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.customerPhone = customerPhone;
+        this.email = email;
+        this.phone = phone;
     }
 
-    // getters-setters
+    private String customerName; // Имя клиента
+    private String email;        // Email клиента
+    private String phone;        // Номер телефона клиента
+
+    // Геттеры и сеттеры
     public String getCustomerName() {
         return customerName;
     }
@@ -22,24 +24,39 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    // method for outputing
-    public void printCustomerDetails() {
-        System.out.println("Customer: " + customerName + ", Email: " + customerEmail + ", Phone: " + customerPhone);
+    // Переопределение метода toString()
+    @Override
+    public String toString() {
+        return "Customer: " + customerName + ", Email: " + email + ", Phone: " + phone;
+    }
+
+    // Переопределение equals() и hashCode()
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Customer customer = (Customer) obj;
+        return customerName.equals(customer.customerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerName);
     }
 }

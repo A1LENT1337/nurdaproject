@@ -1,21 +1,33 @@
-package Project;
+package Project; // Добавлено объявление пакета
+
+import Project.Customer;
+import Project.Order;
+import Project.Product;
 
 public class Main {
     public static void main(String[] args) {
+        // Создание объектов Product
+        Product product1 = new Product("Smartphone", "Brand A", 699.99, "Electronics");
+        Product product2 = new Product("Laptop", "Brand B", 1299.99, "Computers");
+        Product product3 = new Product("Headphones", "Brand C", 199.99, "Audio");
 
-        // creating Item objects
-        Item item1 = new Item("Laptop", 1200.50, 10);
-        Item item2 = new Item("Smartphone", 800.00, 15);
+        // Создание объекта Order
+        Order order = new Order("My Order");
 
-        // creating object Customer
-        Customer customer = new Customer("Asylkhan Malik", "malikasyl@gmail.com", "87000707070");
+        // Добавление товаров в заказ
+        order.addProduct(product1);
+        order.addProduct(product2);
+        order.addProduct(product3);
 
-        // creating object Order and adding
-        Order order = new Order(customer);
-        order.addItem(item1, 1);
-        order.addItem(item2, 2);
-
-        // printing order details
+        // Вывод информации о товарах в заказе
         order.printOrderDetails();
+
+        // Поиск товара по названию
+        Product foundProduct = order.searchByName("Laptop");
+        if (foundProduct != null) {
+            System.out.println("Found product: " + foundProduct.toString());
+        } else {
+            System.out.println("Product not found");
+        }
     }
 }
